@@ -1,0 +1,79 @@
+/* src/styles/global.css */
+
+/* 1. Inyección de Tailwind v4 */
+
+
+/* 2. Importación de Tipografías desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Marcellus&display=swap');
+/* 3. Variables Globales (Modificás acá y cambia en toda la web) */
+@import "tailwindcss";
+:root {
+  /* Paleta Morada */
+  --color-primario: #581c87; /* Morado oscuro para títulos */
+  --color-secundario: #7e22ce; /* Morado intermedio para botones e íconos */
+  --color-acento: #d8b4fe; /* Morado pastel para divisores y bordes sutiles */
+  
+  /* Neutros */
+  --color-fondo: #faf5ff; /* Blanco con un levísimo tinte morado */
+  --color-texto: #1f2937; /* Gris casi negro para lectura */
+  --color-texto-suave: #4b5563; /* Gris medio para descripciones */
+}
+
+/* 4. Estilos Base */
+html, body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* 5. Clases Tipográficas Reutilizables */
+.fuente-titulos {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.fuente-cursiva {
+  font-family: 'Great Vibes', cursive;
+}
+
+/* 
+   6. Animaciones Cinemáticas Ambientales
+   Clase lista para aplicar a contenedores absolutos o imágenes en formato webp/png 
+   para simular partículas de polvo o brisa lenta en el fondo.
+*/
+@keyframes viento-lento {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+  50% { transform: translate(15px, -15px) rotate(1deg); opacity: 0.8; }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+}
+
+.animacion-atmosfera {
+  animation: viento-lento 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@font-face {
+  font-family: 'Claudia';
+  src: url('/fonts/claudiascript.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Romantic';
+  src: url('/fonts/romantisch-personaluse.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anatomia';
+  src: url('/fonts/Anatomia.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

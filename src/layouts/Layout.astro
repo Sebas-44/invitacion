@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+
+
+const { title = "Nuestra boda" } = Astro.props;
+---
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+
+    <main class="content">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+  }
+</style>

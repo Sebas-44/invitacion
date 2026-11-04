@@ -1,0 +1,251 @@
+---
+// src/pages/index.astro
+import '../styles/global.css';
+import Hero from '../components/Hero.astro';
+import Details from '../components/Details.astro';
+import RSVP from '../components/RSVP.astro';
+import Home from '../components/Home.astro';
+import Countdown from '../components/Countdown.astro';
+import Divider from '../components/Divider.astro';
+import Calendar from '../components/Calendar.astro';
+import Location from '../components/Location.astro';
+import Program from '../components/Program.astro';
+import Qr from '../components/Qr.astro';
+import Photos from '../components/Photos.astro';
+import Closing from '../components/Closing.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Boda - Gonzalo & Roxana</title>
+
+    <!-- Logo de la pestaña del navegador -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- ==========================================
+         CONFIGURACIÓN PARA LA VISTA PREVIA EN WHATSAPP
+         ========================================== -->
+    <meta property="og:title" content="¡Nos Casamos! - Gonzalo & Roxana" />
+    <meta property="og:description" content="Estás invitado a celebrar este momento tan especial con nosotros. ¡Hacé clic para ver la invitación y confirmar asistencia!" />
+    
+    <!-- LA IMAGEN QUE VA A APARECER EN WHATSAPP (URL CORREGIDA) -->
+    <meta property="og:image" content="https://invitacion-boda-neon.vercel.app/miniatura.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- EL LINK DE TU PÁGINA -->
+    <meta property="og:url" content="https://invitacion-boda-neon.vercel.app/" />
+    <meta property="og:type" content="website" />
+  </head>
+  <!-- Fondo exterior y bloqueo de scroll inicial -->
+  <body class="bg-gray-900 min-h-screen flex justify-center py-6 px-4 overflow-hidden" id="cuerpo-pagina">
+
+    <!-- ==========================================
+         AUDIO DE FONDO (Invisible)
+         ========================================== -->
+    <audio id="musica-fondo" loop>
+      <source src="/Musica.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- ==========================================
+         BOTÓN DE MÚSICA FLOTANTE
+         ========================================== -->
+    <button id="btn-musica" class="fixed bottom-6 left-6 z-[200] w-14 h-14 flex items-center justify-center bg-[#38008F]/95 backdrop-blur-md border border-white/30 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 opacity-0 pointer-events-none">
+      <svg id="icono-musica" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+    </button>
+
+    <!-- ==========================================
+         PANTALLA INICIAL: SOBRE DIGITAL
+         ========================================== -->
+    <div id="pantalla-sobre" class="fixed inset-0 z-[100] bg-[#f9f9f9] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out">
+      
+      <div id="btn-abrir-sobre" class="relative cursor-pointer hover:scale-105 transition-transform duration-500 animate-pulse-lento flex flex-col items-center">
+        <img 
+          src="/SobreInicio.png" 
+          alt="Sobre de invitación" 
+          class="w-100 sm:w-120 md:w-96 h-auto drop-shadow-2xl" 
+        />
+        <p class="fuente-textos text-sm tracking-[0.2em] uppercase text-gray-500 mt-6 font-semibold">
+          Da click para abrir
+        </p>
+      </div>
+
+      <div class="absolute bottom-16 text-center">
+        <h2 class="fuente-titulos text-4xl text-[#4c1d95] mb-1">Estas invitado</h2>
+        <p class="fuente-textos text-xs sm:text-sm tracking-[0.1em] uppercase text-gray-500">
+          Hemos reservado tu lugar
+        </p>
+      </div>
+    </div>
+    <!-- ========================================== -->
+
+    <!-- ==========================================
+         LLUVIA DE PÉTALOS GLOBAL (5 Pétalos, más lentos y variados)
+         ========================================== -->
+    <div class="fixed inset-0 pointer-events-none z-[60] overflow-hidden" id="contenedor-petalos" style="display: none;">
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+      <div class="petalo"></div>
+    </div>
+
+    <!-- CONTENEDOR VERTICAL (La invitación real en z-[50]) -->
+    <main class="w-full max-w-md bg-[#f9ffff] rounded-3xl shadow-2xl overflow-hidden flex-col text-center relative z-[50]" id="contenido-invitacion" style="display: none;">
+      
+      <Home />   
+      <Divider />
+      <Countdown />
+      <Divider />
+      <Location />
+      <Divider /> 
+      <Program />
+      <Divider />
+      <RSVP />
+      <Divider />
+      <Photos />
+      <Divider />
+      <Closing />
+      
+    </main>
+
+  </body>
+</html>
+
+<style is:global>
+  @import "tailwindcss";
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap');
+
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .fuente-titulos {
+    font-family: 'Great Vibes', cursive; 
+  }
+  .fuente-textos {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  @keyframes pulso-suave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  .animate-pulse-lento {
+    animation: pulso-suave 3s ease-in-out infinite;
+  }
+
+  .sobre-abierto {
+    opacity: 0;
+    transform: translateY(-100vh); 
+    pointer-events: none; 
+  }
+
+  /* Animación para el disco de música girando */
+  @keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .disco-girando {
+    animation: girar 4s linear infinite;
+  }
+
+  /* =========================================
+     ESTILOS DE LOS PÉTALOS MORADOS (Formas Irregulares y Lentos)
+     ========================================= */
+  .petalo {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(76, 29, 149, 0.4); 
+    border-radius: 0 50% 50% 50%; /* Forma base */
+    top: -10%;
+    animation: caer 20s linear infinite; /* Base de tiempo mucho más lenta */
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.05));
+  }
+
+  /* Variaciones extremas de tamaño, forma (border-radius), posición y velocidad */
+  .petalo:nth-child(1) { left: 15%; animation-duration: 24s; animation-delay: 0s; width: 22px; height: 18px; border-radius: 0 60% 40% 50%; }
+  .petalo:nth-child(2) { left: 35%; animation-duration: 30s; animation-delay: 5s; background-color: rgba(107, 33, 168, 0.3); width: 16px; height: 22px; border-radius: 20% 50% 50% 50%; }
+  .petalo:nth-child(3) { left: 55%; animation-duration: 22s; animation-delay: 2s; width: 14px; height: 14px; border-radius: 0 50% 60% 40%; }
+  .petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 8s; background-color: rgba(124, 58, 237, 0.2); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
+  .petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 3s; background-color: rgba(88, 28, 135, 0.3); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; } 
+
+  @keyframes caer {
+    0% { transform: translateY(-50px) rotate(0deg) translateX(0px); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translateY(50vh) rotate(180deg) translateX(40px); }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(-40px); opacity: 0; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pantallaSobre = document.getElementById('pantalla-sobre');
+    const btnAbrir = document.getElementById('btn-abrir-sobre');
+    const cuerpoPagina = document.getElementById('cuerpo-pagina');
+    const contenidoInvitacion = document.getElementById('contenido-invitacion');
+    const contenedorPetalos = document.getElementById('contenedor-petalos'); 
+    
+    const audio = document.getElementById('musica-fondo') as HTMLAudioElement;
+    const btnMusica = document.getElementById('btn-musica') as HTMLButtonElement;
+    const iconoMusica = document.getElementById('icono-musica') as HTMLElement;
+    let musicaReproduciendo = false;
+
+    if (btnAbrir && pantallaSobre && cuerpoPagina && contenidoInvitacion) {
+      btnAbrir.addEventListener('click', () => {
+        
+        contenidoInvitacion.style.display = 'flex';
+        if (contenedorPetalos) contenedorPetalos.style.display = 'block'; 
+
+        pantallaSobre.classList.add('sobre-abierto');
+        
+        btnMusica?.classList.remove('opacity-0', 'pointer-events-none'); 
+        btnMusica?.classList.add('opacity-100');
+
+        if (audio) {
+          audio.play().then(() => {
+            musicaReproduciendo = true;
+            iconoMusica?.classList.add('disco-girando'); 
+            btnMusica?.classList.add('bg-[#4c1d95]/60');
+            btnMusica?.classList.remove('bg-gray-400/60');
+          }).catch(error => {
+            console.log("Autoplay bloqueado por el navegador, el usuario debe interactuar primero.");
+            btnMusica?.classList.add('bg-gray-400/60'); 
+            btnMusica?.classList.remove('bg-[#4c1d95]/60'); 
+          });
+        }
+
+        setTimeout(() => {
+          pantallaSobre.style.display = 'none'; 
+          cuerpoPagina.classList.remove('overflow-hidden'); 
+        }, 1000); 
+
+      });
+    }
+
+    if (btnMusica && audio) {
+      btnMusica.addEventListener('click', () => {
+        if (musicaReproduciendo) {
+          audio.pause();
+          iconoMusica?.classList.remove('disco-girando');
+          btnMusica?.classList.add('bg-gray-400/60', 'opacity-80'); 
+          btnMusica?.classList.remove('bg-[#4c1d95]/60');
+        } else {
+          audio.play();
+          iconoMusica?.classList.add('disco-girando');
+          btnMusica?.classList.remove('bg-gray-400/60', 'opacity-80');
+          btnMusica?.classList.add('bg-[#4c1d95]/60'); 
+        }
+        musicaReproduciendo = !musicaReproduciendo;
+      });
+    }
+  });
+</script>

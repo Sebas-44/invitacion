@@ -1,0 +1,274 @@
+---
+// src/components/RSVP.astro
+---
+
+<section id="seccion-rsvp" class="w-full relative flex flex-col items-center justify-center px-6 py-20 bg-transparent">
+
+  <!-- FLORES DE FONDO -->
+  <img src="/Esquina2.png" alt="Decoración floral" class="absolute top-0 left-0 w-32 opacity-60 z-0 pointer-events-none" />
+  <img src="/Esquina1.png" alt="Decoración floral" class="absolute bottom-0 right-0 w-32 opacity-60 z-0 pointer-events-none " />
+
+  <!-- TARJETA FRONTAL -->
+  <div class="relative bg-white/15 backdrop-blur-md border border-white/0 shadow-2xl w-full max-w-sm sm:max-w-md p-8 sm:p-10 flex flex-col items-center rounded-none z-10 elemento-scroll oculto-scroll">
+    
+    <div class="mb-4 text-purple-900/40">
+      <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+      </svg>
+    </div>
+
+    <!-- Títulos -->
+    <h2 class="fuente-titulos text-center mb-1">Confirma tu Asistencia</h2>
+    <p class="fuente-textos text-gray-600 mb-8 tracking-[0.15em] uppercase text-center font-semibold">
+      antes del 14 de septiembre
+    </p>
+
+    <div class="w-full flex flex-col gap-4">
+
+      <!-- 1. CASILLERO PRINCIPAL -->
+      <input 
+        type="text" 
+        id="nombre-invitado" 
+        placeholder="Tu Nombre y Apellido" 
+        class="w-full bg-white/50 border border-purple-200 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:border-[#4c1d95] fuente-textos text-lg placeholder:text-gray-500 transition-colors"
+      />
+
+      <!-- 2. CASILLEROS DINÁMICOS PARA LOS ACOMPAÑANTES -->
+      <div id="contenedor-nombres-extra" class="w-full flex flex-col gap-4">
+        <!-- JS inyectará aquí los casilleros extra -->
+      </div>
+
+      <!-- 3. BOTONES DE ASISTENCIA -->
+      <div class="flex gap-3 w-full mt-2 mb-2">
+        <button id="btn-si" class="btn-asistencia flex-1 border-2 border-[#360382] bg-[#360382] text-white rounded-xl py-2 fuente-textos text-lg font-semibold transition-all shadow-sm">
+          Sí, asistiré
+        </button>
+        <button id="btn-no" class="btn-asistencia flex-1 border-2 border-purple-200 bg-white/70 text-purple-800 rounded-xl py-2 fuente-textos text-lg font-semibold transition-all hover:border-purple-300 shadow-sm">
+          No asistiré
+        </button>
+      </div>
+
+      <!-- 4. SELECTOR DE ACOMPAÑANTES -->
+      <div class="relative mt-2" id="contenedor-acompanantes">
+        <select id="acompanantes" class="w-full bg-white/50 border border-purple-200 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:border-[#4c1d95] fuente-textos textm-md appearance-none transition-colors">
+          <option value="" disabled selected>Número de acompañantes</option>
+          <option value="0">Ninguno (Voy solo/a)</option>
+          <option value="1">1 Acompañante</option>
+          <option value="2">2 Acompañantes</option>
+          <option value="3">3 Acompañantes</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-purple-800">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+
+      <div class="w-full h-[1px] bg-purple-200 my-4"></div>
+
+      <!-- 5. BOTONES DE ENVÍO -->
+      <button id="enviar-novio" class="w-full bg-[#360382]/85 text-white rounded-full py-3 fuente-textos text-sm sm:text-base font-bold tracking-[0.15em] uppercase hover:bg-[#a17c45] transition-all shadow-md">
+        Enviar al Novio
+      </button>
+      
+      <button id="enviar-novia" class="w-full bg-[#360382]/85 text-white rounded-full py-3 fuente-textos text-sm sm:text-base font-bold tracking-[0.15em] uppercase hover:bg-[#a17c45] transition-all shadow-md">
+        Enviar a la Novia
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Tipografías */
+  .fuente-titulos {
+    font-family: 'Great Vibes', cursive; 
+    font-size: 3rem;
+    font-weight: 550;
+    color: #360382; 
+    line-height: 1;
+    margin-bottom: 0rem;
+  }
+
+  .fuente-textos {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; 
+  }
+
+  /* Animación de entrada */
+  .oculto-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 4s ease-out, transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .visible-scroll {
+    opacity: 1; 
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // ACÁ ESTÁ TU URL DE GOOGLE APPS SCRIPT
+  const URL_GOOGLE_SHEET = "https://script.google.com/macros/s/AKfycbylE1-Q4lxOXJGi4zbFa9j2Nw1RYSIMyqWFvw7Ycj86xrGvnXVbO8pmlbz6bRKItk1lLQ/exec"; 
+
+  const telefonoNovio = "5493886823337"; 
+  const telefonoNovia = "5493884427229";
+
+  let asiste = true;
+  const btnSi = document.getElementById('btn-si');
+  const btnNo = document.getElementById('btn-no');
+  const contenedorAcompanantes = document.getElementById('contenedor-acompanantes');
+  const acompanantesSelect = document.getElementById('acompanantes') as HTMLSelectElement;
+  const contenedorNombresExtra = document.getElementById('contenedor-nombres-extra');
+  const inputPrincipal = document.getElementById('nombre-invitado') as HTMLInputElement;
+  
+  const estiloActivo = ['border-[#4c1d95]', 'bg-[#4c1d95]', 'text-white'];
+  const estiloInactivo = ['border-purple-200', 'bg-white/70', 'text-purple-800', 'hover:border-purple-300'];
+
+  function renderizarCamposAcompanantes() {
+    contenedorNombresExtra.innerHTML = ""; 
+    if (!asiste) return; 
+
+    const numAcompanantes = parseInt(acompanantesSelect.value, 10);
+    if (isNaN(numAcompanantes) || numAcompanantes === 0) return; 
+
+    for (let i = 1; i <= numAcompanantes; i++) {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'input-extra w-full bg-white/50 border border-purple-200 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:border-[#4c1d95] text-lg placeholder:text-gray-500 transition-colors';
+      input.style.fontFamily = "'Cormorant Garamond', serif";
+      input.placeholder = `Nombre del Acompañante ${i}`;
+      contenedorNombresExtra.appendChild(input);
+    }
+  }
+
+  function actualizarBotones() {
+    if (asiste) {
+      btnSi?.classList.add(...estiloActivo);
+      btnSi?.classList.remove(...estiloInactivo);
+      btnNo?.classList.add(...estiloInactivo);
+      btnNo?.classList.remove(...estiloActivo);
+      if (contenedorAcompanantes) contenedorAcompanantes.style.display = 'block';
+      renderizarCamposAcompanantes(); 
+    } else {
+      btnNo?.classList.add(...estiloActivo);
+      btnNo?.classList.remove(...estiloInactivo);
+      btnSi?.classList.add(...estiloInactivo);
+      btnSi?.classList.remove(...estiloActivo);
+      if (contenedorAcompanantes) contenedorAcompanantes.style.display = 'none';
+      contenedorNombresExtra.innerHTML = ""; 
+    }
+  }
+
+  btnSi?.addEventListener('click', () => { asiste = true; actualizarBotones(); });
+  btnNo?.addEventListener('click', () => { asiste = false; actualizarBotones(); });
+  acompanantesSelect?.addEventListener('change', renderizarCamposAcompanantes);
+
+  function armarMensaje() {
+    const nombrePrincipal = inputPrincipal.value.trim();
+
+    if (!nombrePrincipal) {
+      alert("Por favor, ingresá tu nombre principal antes de confirmar.");
+      inputPrincipal.focus();
+      return null;
+    }
+
+    if (asiste) {
+      if (acompanantesSelect.value === "") {
+        alert("Por favor, seleccioná el número de acompañantes.");
+        return null;
+      }
+
+      const inputsExtra = document.querySelectorAll('.input-extra');
+      const nombresArr = [nombrePrincipal]; 
+      let inputVacio = false;
+
+      inputsExtra.forEach((input) => {
+        const valor = (input as HTMLInputElement).value.trim();
+        if (!valor) {
+          inputVacio = true;
+          input.classList.add('border-red-400');
+        } else {
+          input.classList.remove('border-red-400');
+          nombresArr.push(valor);
+        }
+      });
+
+      if (inputVacio) {
+        alert("Por favor, completá los nombres de todos tus acompañantes.");
+        return null;
+      }
+
+      const totalPersonas = nombresArr.length;
+      let texto = `¡Hola! Confirmamos nuestra asistencia a la boda. `;
+      texto += totalPersonas === 1 ? `Iré solo/a. ` : `Seremos un total de ${totalPersonas} personas. `;
+      texto += `Asistentes: ${nombresArr.join(', ')}.`;
+      
+      return encodeURIComponent(texto);
+
+    } else {
+      let texto = `¡Hola! Soy ${nombrePrincipal}. Lamentablemente no podré asistir a la boda. ¡Les deseo lo mejor!`;
+      return encodeURIComponent(texto);
+    }
+  }
+
+  // FUNCIÓN INSTANTÁNEA: Sin demoras, enviamos de fondo y abrimos WhatsApp de golpe
+  function procesarEnvio(telefono) {
+    const mensaje = armarMensaje();
+    if (!mensaje) return;
+
+    const urlWhatsApp = `https://wa.me/${telefono}?text=${mensaje}`;
+    const nombrePrincipal = inputPrincipal.value.trim();
+    let totalPersonas = 1;
+    const nombresArr = [];
+
+    if (asiste) {
+      const inputsExtra = document.querySelectorAll('.input-extra');
+      inputsExtra.forEach((input) => {
+        const valor = (input as HTMLInputElement).value.trim();
+        if (valor) nombresArr.push(valor);
+      });
+      totalPersonas += nombresArr.length;
+    }
+
+    const params = new URLSearchParams();
+    params.append('nombre', nombrePrincipal);
+    params.append('asiste', asiste ? "Sí" : "No");
+    params.append('cantidad', asiste ? totalPersonas.toString() : "0");
+    params.append('acompanantes', asiste && nombresArr.length > 0 ? nombresArr.join(', ') : "-");
+
+    // 1. DISPARAMOS A GOOGLE SHEETS (Con 'keepalive' aseguramos que no se cancele)
+    fetch(URL_GOOGLE_SHEET, {
+      method: 'POST',
+      mode: 'no-cors',
+      keepalive: true, // Magia para que se envíe sin importar que cambiemos de pestaña
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params
+    }).catch(() => {}); // Ignoramos posibles alertas de red silenciosamente
+
+    // 2. ABRIMOS WHATSAPP INMEDIATAMENTE
+    window.open(urlWhatsApp, '_blank');
+  }
+
+  // Asignamos la función directamente al clic sin cambiar textos ni bloquear botones
+  document.getElementById('enviar-novio')?.addEventListener('click', () => {
+    procesarEnvio(telefonoNovio);
+  });
+
+  document.getElementById('enviar-novia')?.addEventListener('click', () => {
+    procesarEnvio(telefonoNovia);
+  });
+
+  const observadorRSVP = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visible-scroll');
+        observadorRSVP.unobserve(entrada.target); 
+      }
+    });
+  }, { threshold: 0.15 });
+
+  const elementoRSVP = document.querySelector('.elemento-scroll');
+  if (elementoRSVP) observadorRSVP.observe(elementoRSVP);
+</script>

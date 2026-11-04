@@ -1,0 +1,69 @@
+---
+// src/components/PhotoAlbum.astro
+---
+
+<section class="flex flex-col items-center justify-center w-full px-4 py-12">
+  
+  <!-- Encabezado -->
+  <div class="text-center mb-8 px-2">
+    <h2 class="titulo-album">Album colaborativo</h2>
+    <p class="subtitulo-album">Escanea el QR y compartí tus fotos de la noche.</p>
+  </div>
+
+  <!-- Contenedor del QR -->
+  <div class="tarjeta-qr">
+    <!-- 
+      Cuando tengas tu código QR real:
+      1. Guardá la imagen en tu carpeta public/ (ej: public/mi-qr.png)
+      2. Cambiá el src de abajo por src="/mi-qr.png" 
+    -->
+    <img 
+      src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://ejemplo.com/tu-album" 
+      alt="Código QR del álbum colaborativo" 
+      class="qr-imagen"
+    />
+  </div>
+
+</section>
+
+<style>
+  /* =========================================
+     ESTILOS VISUALES - ÁLBUM COLABORATIVO
+     ========================================= */
+
+  .titulo-album {
+    font-family: 'Playfair Display', Georgia, serif; /* Fuente elegante */
+    font-size: 2.25rem;
+    font-style: italic;
+    color: #581c87; /* Tono morado oscuro */
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitulo-album {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #4b5563; /* Gris oscuro */
+    line-height: 1.4;
+  }
+
+  /* TARJETA BLANCA DEL QR */
+  .tarjeta-qr {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1.5rem; /* Esquinas redondeadas como en la foto */
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.05); /* Sombra suave y amplia */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 220px; /* Tamaño máximo para que no quede gigante en monitores */
+    aspect-ratio: 1 / 1; /* Mantiene un cuadrado perfecto */
+    border: 1px solid rgba(216, 180, 254, 0.3); /* Borde súper sutil opcional */
+  }
+
+  .qr-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

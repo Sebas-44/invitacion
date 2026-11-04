@@ -1,0 +1,63 @@
+---
+// Decoración de fondo (ramas/hojas). Va fija detrás de todo el contenido,
+// por eso lleva aria-hidden: no aporta información, solo es visual.
+---
+<div class="bg-decor" aria-hidden="true">
+  <svg class="bg-decor__branch bg-decor__branch--top" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="soft-blur-1">
+        <feGaussianBlur stdDeviation="0.6" />
+      </filter>
+    </defs>
+    <g filter="url(#soft-blur-1)" opacity="0.9">
+      <path d="M20 20 C80 60, 100 120, 60 180" stroke="#9b7ebd" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="70" cy="70" rx="26" ry="18" fill="#c9b6e4" transform="rotate(-25 70 70)"/>
+      <ellipse cx="95" cy="110" rx="22" ry="15" fill="#e9defa" transform="rotate(10 95 110)"/>
+      <ellipse cx="55" cy="140" rx="20" ry="14" fill="#9b7ebd" opacity="0.7" transform="rotate(-40 55 140)"/>
+      <ellipse cx="30" cy="90" rx="18" ry="12" fill="#5b3e75" opacity="0.5" transform="rotate(35 30 90)"/>
+    </g>
+  </svg>
+
+  <svg class="bg-decor__branch bg-decor__branch--bottom" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="soft-blur-2">
+        <feGaussianBlur stdDeviation="0.6" />
+      </filter>
+    </defs>
+    <g filter="url(#soft-blur-2)" opacity="0.9">
+      <path d="M380 380 C320 340, 300 280, 340 220" stroke="#9b7ebd" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="330" cy="330" rx="26" ry="18" fill="#c9b6e4" transform="rotate(-25 330 330)"/>
+      <ellipse cx="305" cy="290" rx="22" ry="15" fill="#e9defa" transform="rotate(10 305 290)"/>
+      <ellipse cx="345" cy="260" rx="20" ry="14" fill="#9b7ebd" opacity="0.7" transform="rotate(-40 345 260)"/>
+      <ellipse cx="370" cy="310" rx="18" ry="12" fill="#5b3e75" opacity="0.5" transform="rotate(35 370 310)"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .bg-decor {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bg-decor__branch {
+    position: absolute;
+    width: 260px;
+    height: auto;
+  }
+  .bg-decor__branch--top {
+    top: -20px;
+    left: -20px;
+  }
+  .bg-decor__branch--bottom {
+    bottom: -20px;
+    right: -20px;
+  }
+  @media (max-width: 480px) {
+    .bg-decor__branch {
+      width: 170px;
+    }
+  }
+</style>

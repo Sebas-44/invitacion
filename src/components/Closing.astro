@@ -1,0 +1,143 @@
+---
+// src/components/Closing.astro
+---
+
+<section id="seccion-cierre" class="w-full relative flex flex-col items-center justify-center px-6 py-24 bg-transparent overflow-hidden min-h-[60vh]">
+  
+  <!-- 1. IMAGEN DE FONDO (z-0) -->
+  <!-- Al poner h-full e inset-0, evitamos cualquier línea de corte -->
+  <img
+
+    src="/Fondocierre.jpg"
+
+    alt="Fondo floral decorativo"
+
+    class="absolute bottom-0 left-0 w-full h-auto max-h-[50vh] object-cover object-bottom opacity-60 z-0 pointer-events-none"
+
+  />
+
+  <!-- 2. ÚNICO DEGRADADO (z-[5]) -->
+  <!-- Está por encima de la imagen pero por debajo de las letras -->
+  <div class="absolute inset-0 w-full h-full bg-gradient-to-t from-[#4c1d95]/40 via-[#4c1d95]/10 to-transparent z-[5] pointer-events-none"></div>
+
+  <!-- 3. CONTENEDOR PRINCIPAL / TEXTOS (z-10) -->
+  <div class="flex flex-col items-center justify-center z-10 w-full max-w-lg text-center elemento-scroll oculto-scroll">
+
+    <!-- Mensaje de invitación -->
+    <p class="mensaje-esperamos">
+      ¡Te esperamos!
+    </p>
+
+    <!-- Nombres de los novios con el efecto dorado exacto del Home -->
+    <div class="flex flex-col items-center justify-center mb-6">
+      <h2 class="nombre-oro">Gonzalo</h2>
+      <span class="simbolo-union">&</span>
+      <h2 class="nombre-oro">Roxana</h2>
+    </div>
+
+    <!-- Imagen floral / Anillos de cierre -->
+    <div class="w-64 md:w-80 mt-2 mb-16">
+      <img 
+        src="/alianzas.png" 
+        alt="Decoración de cierre floral" 
+        class="w-full h-auto drop-shadow-sm opacity-90 hover:scale-105 transition-transform duration-700" 
+      />
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+  /* =========================================
+     ESTILOS EXTRAÍDOS DEL HOME
+     ========================================= */
+
+  .mensaje-esperamos {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    color: #3c3146; 
+    margin-bottom: 1rem;
+  }
+
+  .nombre-oro {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5.5rem; 
+    font-weight: 580;
+    line-height: 1.1; 
+    padding: 0.5rem 1rem;
+    margin: 0;
+
+    /* Efecto de Oro Metálico */
+    background: linear-gradient(to right, #9c7842, #d2a32c, #edd968, #b89053, #fdf5c9, #9c7842);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: reflejo-oro 8s linear infinite;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.04));
+  }
+
+  .simbolo-union {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #d2a32c; 
+    margin: -1.5rem 0; 
+  }
+
+  .fuente-footer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes reflejo-oro {
+    to { background-position: 200% center; }
+  }
+
+  /* =========================================
+     ANIMACIÓN DE ENTRADA AL SCROLLEAR
+     ========================================= */
+  .oculto-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 4s ease-out, transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .visible-scroll {
+    opacity: 1; 
+    transform: translateY(0);
+  }
+  
+  .retraso-footer {
+    transition-delay: 0.3s;
+  }
+
+  /* Ajustes responsivos para celulares pequeños */
+  @media (max-width: 400px) {
+    .nombre-oro {
+      font-size: 4.5rem;
+    }
+    .mensaje-esperamos {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<script>
+  const observadorCierre = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visible-scroll');
+        observadorCierre.unobserve(entrada.target); 
+      }
+    });
+  }, { threshold: 0.15 });
+
+  const elementosCierre = document.querySelectorAll('#seccion-cierre .elemento-scroll');
+  elementosCierre.forEach(el => {
+    observadorCierre.observe(el);
+  });
+</script>
