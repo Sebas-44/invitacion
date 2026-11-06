@@ -1,134 +1,78 @@
 ---
 // src/components/Location.astro
+// Ceremonia: hora, lugar, botón al mapa y foto del lugar. Los datos salen de data/boda.ts
+import { boda } from '../data/boda';
+
+const { hora, lugar, localidad, mapa } = boda.ceremonia;
+const fotoLugar = boda.imagenes.lugar;
 ---
-<section id="seccion-ubicacion" class="w-full relative flex flex-col items-center justify-center text-center px-6 py-20 bg-white oculto-scroll">
 
-  <!-- FLORES DE FONDO -->
-  <!-- Flor Esquina Superior Izquierda -->
-  <img 
-    src="/Esquina2.png" 
-    alt="Decoración floral" 
-    class="absolute bottom-10 left-0 w-28 sm:w-36 opacity-60 z-0 pointer-events-none"
-  />
+<section id="ubicacion" class="w-full px-8 py-10 text-center">
 
-  <!-- Flor Esquina Inferior Derecha (Rotada) -->
-  <img 
-    src="/Esquina1.png" 
-    alt="Decoración floral" 
-    class="absolute top-4 right-0 w-28 sm:w-36 opacity-60 z-0 pointer-events-none "
-  />
+  <!-- Título: Cormorant Garamond xl -->
+<h2
+  data-reveal
+  class="font-ui text-xl font-semibold uppercase tracking-[0.25em] text-malva"
+  >
+    Ceremonia:
+  </h2>
 
-  <!-- CONTENEDOR PRINCIPAL DE LAS TARJETAS (Z-10 para estar sobre las flores) -->
-  <div class="relative w-full max-w-sm sm:max-w-md mx-auto flex flex-col items-center z-10 mt-6">
-    
-    <!-- TARJETA TRASERA (FOTO) -->
-    <!-- Se rota levemente (-4deg) y se desplaza hacia arriba y a la izquierda -->
+  <!-- Hora: número grande, como el del calendario y la cuenta regresiva -->
+  <p
+    data-reveal
+    style="--reveal-delay: 100ms"
+    class="mt-6 font-body text-6xl font-medium leading-none text-rosa sm:text-6xl"
+  >
+    {hora} hs
+  </p>
 
-
-    <!-- TARJETA FRONTAL (VIDRIO ESMERILADO / GLASSMORPHISM) -->
-    <div class="relative bg-white/10 backdrop-blur-md border border-white/0 shadow-2xl w-[100%] sm:w-full p-8 sm:p-10 flex flex-col items-center gap-8">
-      
-     <!-- BLOQUE CEREMONIA -->
-      <div class="flex flex-col items-center w-full">
-        <h3 class="fuente-titulos text-4xl sm:text-5xl text-gray-800 mb-3 tracking-wide">
-          Ceremonia
-        </h3>
-        <p class="fuente-textos text-2xl text-gray-600 leading-snug mb-5">
-          Sábado 26 de Septiembre<br>
-        
-        </p>
-        <p class="fuente-textos text-2xl text-gray-600 leading-snug ">
-          Lugar:
-        </p>
-        <p class="fuente-textos text-2xl text-gray-600 leading-snug mb-5">
-          Salón del B° Luján <br/>Abra Pampa
-
-        </p>
-
-        
-        <p class="fuente-textos text-lg tracking-[0.15em] text-gray-500 uppercase font-semibold mb-4">
-          Hora 18:30
-        </p>
-
-        <a href="https://maps.app.goo.gl/Yh1pzKgqoLa1pXNA6" target="_blank" class="fuente-textos text-[14px] sm:text-xs tracking-[0.2em] font-bold uppercase bg-[#360382]/85 text-white rounded-full px-6 py-2 hover:bg-purple-950 transition-all duration-300 mb-4 shadow-md">
-        Ver Ubicación
-         </a>
-
-
-        <p class="fuente-textos text-2xl text-gray-600 leading-snug ">
-
-        </p>
-      </div>
-
-      <!-- Divisor minimalista en el centro -->
-       <!--<div class="w-16 h-[1px] bg-gray-300"></div>-->
-
-      <!-- BLOQUE RECEPCIÓN -->
-      <!-- <div class="flex flex-col items-center w-full">
-        <h3 class="font-['Great_Vibes'] text-4xl sm:text-5xl text-gray-800 mb-3 tracking-wide">
-          Recepción
-        </h3>
-        <p class="font-['Cormorant_Garamond'] text-lg text-gray-600 leading-snug mb-5">
-          Salón Las Camelias<br>
-          Ruta Nacional 9, Km 4
-        </p>
-        <a href="https://maps.app.goo.gl/placeholder" target="_blank" class="font-['Cormorant_Garamond'] text-[11px] sm:text-xs tracking-[0.2em] font-semibold uppercase border-[1.5px] border-gray-800 text-gray-800 rounded-full px-6 py-2 hover:bg-gray-800 hover:text-white transition-all duration-300 mb-4">
-          Ubicación
-        </a>
-        <p class="font-['Cormorant_Garamond'] text-sm tracking-[0.15em] text-gray-500 uppercase font-semibold">
-          Hora: 19:00
-        </p>
-      </div>-->
-
-    </div>
+  <!-- Lugar: subtítulo y descripción en Montserrat -->
+  <div data-reveal style="--reveal-delay: 200ms" class="mt-8">
+    <h3 class="font-ui text-xs font-semibold uppercase tracking-[0.2em] text-malva">Lugar</h3>
+    <p class="mt-3 font-ui text-base text-malva">{lugar}</p>
+    <p class="mt-1 font-ui text-xs tracking-[0.05em] text-malva/80">{localidad}</p>
   </div>
+
+  <!-- Botón al mapa, con la manito que sobresale como en la referencia -->
+  <a
+    data-reveal
+    style="--reveal-delay: 300ms"
+    href={mapa}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="relative mt-6 inline-flex items-center justify-center rounded-full bg-rosa-boton px-10 py-3 font-ui text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
+  >
+    Ver ubicación
+    <svg
+      class="absolute -bottom-4 -right-3 size-8 -rotate-12 text-white drop-shadow-[0_1px_1.5px_rgb(138_84_112/0.8)]"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M22 14a8 8 0 0 1-8 8" />
+      <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+      <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1" />
+      <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10" />
+      <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+    </svg>
+  </a>
+
+  <!-- Foto del lugar -->
+  <figure
+    data-reveal
+    class="mx-auto mt-10 max-w-xs overflow-hidden rounded-2xl shadow-md shadow-rosa/20"
+  >
+    <img
+      src={fotoLugar}
+      alt={`Vista de ${lugar}`}
+      class="aspect-[7/5] w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+
 </section>
-
-<style>
-  /* Clases de tipografía garantizadas para Astro */
-  .fuente-titulos {
-    font-family: 'Great Vibes', cursive; 
-    font-size: 3rem;
-    font-weight: 550;
-    color: #360382; 
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .fuente-textos {
-    font-family: 'Cormorant Garamond';
-  }
-  /* =========================================
-     ANIMACIÓN DE SCROLL
-     ========================================= */
-  .oculto-scroll {
-    opacity: 4;
-    transform: translateY(40px);
-    transition: opacity 4s ease-out, transform 4s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  .visible-scroll {
-    opacity: 4;
-    transform: translateY(0);
-  }
-</style>
-<script>
-// Observador para la tarjeta de ubicación
-  const observadorUbicacion = new IntersectionObserver((entradas) => {
-    entradas.forEach(entrada => {
-      // Cuando la sección entra en la pantalla
-      if (entrada.isIntersecting) {
-        entrada.target.classList.add('visible-scroll');
-        // Dejamos de observar para que no se repita al subir y bajar
-        observadorUbicacion.unobserve(entrada.target); 
-      }
-    });
-  }, {
-    threshold: 0.15 // Se activa cuando asoma un 15%
-  });
-
-  // Buscamos la sección y la observamos
-  const seccionUbicacion = document.getElementById('seccion-ubicacion');
-  if (seccionUbicacion) {
-    observadorUbicacion.observe(seccionUbicacion);
-  }
-</script>

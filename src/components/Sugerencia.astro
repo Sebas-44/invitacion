@@ -1,0 +1,121 @@
+---
+// src/components/Sugerencia.astro
+// Los invitados sugieren una canción y se les abre WhatsApp con el mensaje armado.
+// No necesita servidor. El número sale de data/boda.ts (whatsapp).
+import { boda } from '../data/boda';
+
+const { novio, novia } = boda.novios;
+
+// A quién le llegan las sugerencias: cambiá `novia` por `novio` si preferís
+const destino = boda.whatsapp.novia;
+---
+
+<section id="sugerencia" class="w-full px-8 py-10 text-center">
+
+  <!-- Ícono: nota musical con destellos -->
+  <div data-reveal class="relative mx-auto size-14 text-rosa-boton" aria-hidden="true">
+    <svg
+      class="absolute inset-0 size-full"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 16V3a1 1 0 0 0-1.28-.96l-10 2.917a1 1 0 0 0-.72.96V19" fill="none" />
+      <circle cx="18" cy="16" r="3" />
+      <circle cx="6" cy="19" r="3" />
+    </svg>
+    <svg class="absolute -left-3 -top-1 size-3.5" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+    </svg>
+    <svg class="absolute -right-3 top-2 size-2.5" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+    </svg>
+  </div>
+
+  <!-- Título: Cormorant Garamond xl -->
+  <h2
+    data-reveal
+    style="--reveal-delay: 100ms"
+    class="mt-4 font-body text-xl font-semibold uppercase tracking-[0.12em] text-malva"
+  >
+    Sugerí una canción
+  </h2>
+
+  <!-- Descripción: Montserrat -->
+  <p
+    data-reveal
+    style="--reveal-delay: 150ms"
+    class="mx-auto mt-2 max-w-xs font-ui text-sm leading-relaxed text-malva"
+  >
+    Sugerinos la música que crees que no puede faltar esta noche especial.
+  </p>
+
+  <!-- Formulario. Sin JavaScript, el navegador igual abre WhatsApp con la canción -->
+  <form
+    id="form-sugerencia"
+    data-reveal
+    style="--reveal-delay: 250ms"
+    action={`https://wa.me/${destino}`}
+    method="get"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-whatsapp={destino}
+    data-novios={`${novio} y ${novia}`}
+    class="mx-auto mt-8 flex max-w-xs flex-col items-center"
+  >
+    <label
+      for="cancion"
+      class="font-ui text-[11px] font-medium uppercase leading-relaxed tracking-[0.18em] text-malva"
+    >
+      Banda o intérprete /<br />nombre de la canción <span class="text-rosa">*</span>
+    </label>
+
+    <input
+      id="cancion"
+      name="text"
+      type="text"
+      required
+      maxlength="120"
+      autocomplete="off"
+      placeholder="Ej: Coldplay - Yellow"
+      class="mt-3 w-full rounded-xl border border-rosa/30 bg-white px-4 py-3 font-ui text-sm text-malva shadow-sm placeholder:text-malva/50 focus:border-rosa focus:outline-none focus:ring-2 focus:ring-rosa/30"
+    />
+
+    <button
+      type="submit"
+      class="mt-5 rounded-full bg-linear-to-b from-rosa-boton to-rosa px-14 py-3 font-ui text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-lg shadow-rosa/30 transition-all duration-300 hover:scale-105 active:scale-95"
+    >
+      Enviar
+    </button>
+
+    <p id="aviso-sugerencia" role="status" class="mt-4 min-h-5 font-ui text-xs text-rosa"></p>
+  </form>
+
+</section>
+
+<script>
+  const formulario = document.querySelector<HTMLFormElement>('#form-sugerencia');
+
+  if (formulario) {
+    const campo = formulario.querySelector<HTMLInputElement>('input');
+    const aviso = document.getElementById('aviso-sugerencia');
+
+    formulario.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+
+      const cancion = campo?.value.trim();
+      if (!campo || !cancion) return;
+
+      const mensaje = `¡Hola! Mi sugerencia de canción para la boda de ${formulario.dataset.novios}: ${cancion}`;
+      const url = `https://wa.me/${formulario.dataset.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, '_blank', 'noopener');
+
+      campo.value = '';
+      if (aviso) aviso.textContent = '¡Gracias! Se abrió WhatsApp para que envíes tu sugerencia.';
+    });
+  }
+</script>

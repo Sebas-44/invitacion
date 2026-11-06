@@ -1,166 +1,87 @@
 ---
 // src/components/Countdown.astro
+// Cuenta regresiva hasta la fecha y hora de data/boda.ts (fecha.iso).
+import { boda } from '../data/boda';
+
+const unidades = [
+  { clave: 'dias', etiqueta: 'Días' },
+  { clave: 'horas', etiqueta: 'Horas' },
+  { clave: 'minutos', etiqueta: 'Min' },
+  { clave: 'segundos', etiqueta: 'Seg' },
+];
 ---
 
-<!-- Sección del Contador (Va justo debajo de <Home />) -->
-<section id="seccion-contador" class="w-full relative flex flex-col items-center justify-center text-center px-6 py-12 bg-purple-100 difuminar-bordes oculto-scroll">
-  
-<!-- Flor Esquina Inferior Izquierda -->
-  <img 
-    src="Esquina2.png" 
-    alt="Decoración floral" 
-    class="absolute bottom-0 left-0 w-28 sm:w-36 opacity-60 z-0 pointer-events-none"
-  />
+<section id="cuenta-regresiva" class="w-full px-6 py-10 text-center">
 
-  <!-- Flor Esquina Superior Derecha (Rotada) -->
-  <img 
-    src="/Esquina1.png" 
-    alt="Decoración floral" 
-    class="absolute top-0 right-0 w-28 sm:w-36 opacity-60 z-0 pointer-events-none "
-  />
+<h2
+  data-reveal
+  class="font-ui text-xl font-semibold uppercase tracking-[0.25em] text-malva"
+>
+  Faltan
+</h2>
 
-  <div class=" bg-white/75 backdrop-blur-md border border-purple-100 shadow-xl shadow-purple-900/5 rounded-[1.5rem] w-full p-8 flex flex-col items-center relative overflow-hidden">
-    
-    <!-- Brillo sutil interno -->
-    <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-50 rounded-full blur-2xl pointer-events-none"></div>
-
-    <!-- Título con tu nueva clase -->
-    <h2 class="fuente-titulos">
-      Cuenta regresiva
-    </h2>
-
-    <!-- Contenedores de tiempo -->
-    <div class="grid grid-cols-4 gap-2 w-full relative z-10">
-      
-      <!-- Días -->
-      <div class="flex flex-col items-center justify-center bg-purple-50/50 border border-purple-100 p-2 sm:p-4 rounded-2xl">
-        <span id="days" class="fuente-textos text-4xl sm:text-5xl font-semibold text-[#4c1d95] leading-none">00</span>
-        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-purple-600 font-lg   mt-2">Días</span>
-      </div>
-
-      <!-- Horas -->
-      <div class="flex flex-col items-center justify-center bg-purple-50/50 border border-purple-100 p-2 sm:p-4 rounded-2xl">
-        <span id="hours" class="fuente-textos text-4xl sm:text-5xl font-semibold text-[#4c1d95] leading-none">00</span>
-        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-purple-600 font-lg   mt-2">Hs</span>
-      </div>
-
-      <!-- Minutos -->
-      <div class="flex flex-col items-center justify-center bg-purple-50/50 border border-purple-100 p-2 sm:p-4 rounded-2xl">
-        <span id="minutes" class="fuente-textos text-4xl sm:text-5xl font-semibold text-[#4c1d95] leading-none">00</span>
-        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-purple-600 font-lg   mt-2">Min</span>
-      </div>
-
-      <!-- Segundos -->
-      <div class="flex flex-col items-center justify-center bg-purple-50/50 border border-purple-100 p-2 sm:p-4 rounded-2xl">
-        <span id="seconds" class="fuente-textos text-4xl sm:text-5xl font-semibold text-[#4c1d95] leading-none">00</span>
-        <span class="text-[10px] sm:text-xs uppercase tracking-wider text-purple-600 font-lg   mt-2">Seg</span>
-      </div>
-
-    </div>
-    <!-- BLOQUE CEREMONIA -->
-      <div class="flex flex-col items-center w-full">
-        
-
-        <p class="fuente-textos text-2xl text-gray-600 leading-snug mt-4 ">
-          Sábado 26 de Septiembre 2026<br> 
-        </p>
-      </div>
+  <div
+    data-reveal
+    style="--reveal-delay: 150ms"
+    data-fecha={boda.fecha.iso}
+    role="timer"
+    aria-label="Cuenta regresiva para la boda"
+    class="mt-4 flex items-start justify-center"
+  >
+    {unidades.map((u, i) => (
+      <>
+        {i > 0 && (
+          <span
+            aria-hidden="true"
+            class="px-1.5 font-body text-4xl leading-none text-rosa sm:px-1 sm:text-5xl"
+          >
+            :
+          </span>
+        )}
+        <div class="flex flex-col items-center">
+          <span
+            data-unidad={u.clave}
+            class="min-w-[2ch] font-body text-6xl font-medium leading-none text-rosa sm:text-6xl"
+          >
+            00
+          </span>
+          <span class="mt-2 font-body text-base text-rosa/75">{u.etiqueta}</span>
+        </div>
+      </>
+    ))}
   </div>
+
 </section>
 
-<style>
-  /* Tu estilo nuevo agregado acá */
-  .fuente-titulos {
-    font-family: 'Great Vibes', cursive; 
-    font-size: 3rem;
-    font-weight: 550;
-    color: #360382; 
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-    /* TIPOGRAFÍAS Y COLORES */
-  .etiqueta-superior {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;  
-    font-weight:600;
-    color: #2a153d; 
-    margin-bottom: 0.8rem;
-  }
-
-  /* Agregamos una clase unificada para aplicar Garamond a los textos y números */
-  .fuente-textos {
-    font-family: 'Cormorant Garamond';
-  }
-  .difuminar-bordes {
-    /* El fondo arranca transparente, se vuelve sólido al 10%, se mantiene sólido hasta el 90%, y vuelve a transparente al final */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%,black 40%, black 95%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 40%,black 95%, transparent 100%);
-  }
-
-  /* Nota: Corregí opacity: 5 a 0 y 1 para que la animación vuelva a funcionar (opacity solo va de 0 a 1) */
-  .oculto-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 4s ease-out, transform 4s cubic-bezier(0.35, 1, 0.5, 1);
-  }
-
-  .visible-scroll {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-
 <script>
-  // DEFINÍ LA FECHA Y HORA DE TU BODA (Año, Mes - 1, Día, Hora, Minutos)
-  const weddingDate = new Date(2026, 8, 26, 17, 0, 0).getTime();
+  const contenedor = document.querySelector<HTMLElement>('#cuenta-regresiva [data-fecha]');
 
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const difference = weddingDate - now;
+  if (contenedor) {
+    // La fecha ISO trae la zona horaria (-03:00), así que funciona igual
+    // sin importar desde dónde la abra cada invitado.
+    const objetivo = new Date(contenedor.dataset.fecha ?? '').getTime();
 
-    if (difference <= 0) {
-      document.getElementById("days")!.innerText = "00";
-      document.getElementById("hours")!.innerText = "00";
-      document.getElementById("minutes")!.innerText = "00";
-      document.getElementById("seconds")!.innerText = "00";
-      return;
+    const celda = (clave: string) =>
+      contenedor.querySelector<HTMLElement>(`[data-unidad="${clave}"]`);
+    const dias = celda('dias');
+    const horas = celda('horas');
+    const minutos = celda('minutos');
+    const segundos = celda('segundos');
+
+    const dosDigitos = (n: number) => String(n).padStart(2, '0');
+
+    function actualizar() {
+      const diferencia = Math.max(0, objetivo - Date.now());
+
+      if (dias) dias.textContent = dosDigitos(Math.floor(diferencia / 86_400_000));
+      if (horas) horas.textContent = dosDigitos(Math.floor((diferencia % 86_400_000) / 3_600_000));
+      if (minutos) minutos.textContent = dosDigitos(Math.floor((diferencia % 3_600_000) / 60_000));
+      if (segundos) segundos.textContent = dosDigitos(Math.floor((diferencia % 60_000) / 1000));
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    const pad = (num: number) => String(num).padStart(2, "0");
-
-    document.getElementById("days")!.innerText = pad(days);
-    document.getElementById("hours")!.innerText = pad(hours);
-    document.getElementById("minutes")!.innerText = pad(minutes);
-    document.getElementById("seconds")!.innerText = pad(seconds);
-  }
-
-  updateCountdown();
-
-  setInterval(updateCountdown, 1000);
-
-  // Configuración del Intersection Observer para la aparición al hacer scroll
-  const observador = new IntersectionObserver((entradas) => {
-    entradas.forEach(entrada => {
-      // Si la sección entra en la pantalla del usuario
-      if (entrada.isIntersecting) {
-        entrada.target.classList.add('visible-scroll');
-        
-        // Dejamos de observarlo para que la animación solo ocurra la primera vez que bajan
-        observador.unobserve(entrada.target); 
-      }
-    });
-  }, {
-    threshold: 0.15 // Se activa cuando el 15% de la tarjeta ya asoma en la pantalla
-  });
-
-  // Buscamos la sección del contador y le conectamos el observador
-  const seccionContador = document.getElementById('seccion-contador');
-  if (seccionContador) {
-    observador.observe(seccionContador);
+    if (!Number.isNaN(objetivo)) {
+      actualizar();
+      setInterval(actualizar, 1000);
+    }
   }
 </script>

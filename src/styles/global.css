@@ -1,79 +1,200 @@
-/* src/styles/global.css */
-
-/* 1. Inyección de Tailwind v4 */
-
-
-/* 2. Importación de Tipografías desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Marcellus&display=swap');
-/* 3. Variables Globales (Modificás acá y cambia en toda la web) */
 @import "tailwindcss";
-:root {
-  /* Paleta Morada */
-  --color-primario: #581c87; /* Morado oscuro para títulos */
-  --color-secundario: #7e22ce; /* Morado intermedio para botones e íconos */
-  --color-acento: #d8b4fe; /* Morado pastel para divisores y bordes sutiles */
-  
-  /* Neutros */
-  --color-fondo: #faf5ff; /* Blanco con un levísimo tinte morado */
-  --color-texto: #1f2937; /* Gris casi negro para lectura */
-  --color-texto-suave: #4b5563; /* Gris medio para descripciones */
+
+/* =========================================================
+   TOKENS DEL TEMA
+   Cambiar la paleta o las tipografías de una boda nueva
+   se hace SOLO acá. Generan utilidades de Tailwind:
+   font-script, font-body, font-serif, bg-brand, text-brand-dark, etc.
+   Las fuentes se cargan con <link> en layouts/BaseLayout.astro
+   ========================================================= */
+@theme {
+  --font-script: 'Great Vibes', cursive;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-ui: 'Montserrat', system-ui, sans-serif; /* etiquetas en mayúsculas espaciadas */
+
+  /* Paleta rosa pastel (medida de la invitación de referencia) */
+  --color-rosa: #c4566b;        /* títulos y detalles */
+  --color-rosa-boton: #d27487;  /* botones */
+  --color-malva: #8a5470;       /* textos secundarios */
+  --color-rosa-suave: #f6c4cd;  /* toques de color del fondo */
+  --color-paper: #fffdfc;       /* blanco cálido: base de la invitación */
+  --color-pagina: #f7f0ee;      /* fondo detrás de la tarjeta (pantallas anchas) */
+
+  /* Violetas de la plantilla vieja: se eliminan cuando migremos los componentes */
+  --color-brand: #4c1d95;
+  --color-brand-dark: #360382;
 }
 
-/* 4. Estilos Base */
-html, body {
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
-  font-family: 'Montserrat', sans-serif;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+/* =========================================================
+   ALIAS DE COMPATIBILIDAD
+   Los componentes viejos todavía usan estas clases.
+   A medida que los migremos pasan a font-script / font-body.
+   (Van en @layer components para que las utilidades de
+   Tailwind puedan pisarlas.)
+   ========================================================= */
+@layer components {
+  .fuente-titulos { font-family: var(--font-script); }
+  .fuente-textos  { font-family: var(--font-body); }
 }
 
-/* 5. Clases Tipográficas Reutilizables */
-.fuente-titulos {
-  font-family: 'Playfair Display', Georgia, serif;
+/* =========================================================
+   PIEZAS REUTILIZABLES
+   .etiqueta      → texto chico en mayúsculas con letras espaciadas
+                    (versículo, padres, "Confirmá tu asistencia"...)
+   .foto-rasgada  → foto con borde superior e inferior de papel rasgado
+                    (la forma es una máscara SVG, funciona con cualquier foto)
+   ========================================================= */
+@layer components {
+  .etiqueta {
+    @apply font-ui text-[11px] uppercase leading-[1.9] tracking-[0.18em] text-malva;
+    .titulo {
+      @apply font-body text-3xl font-medium uppercase tracking-[0.06em] text-rosa;
+      }
+
+      .subtitulo {
+      @apply font-ui text-xs font-semibold uppercase tracking-[0.2em] text-malva;
+      }
+
+      .descripcion {
+      @apply font-ui text-sm leading-relaxed text-malva;
+      }
+  }
+
+  .foto-rasgada {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 54 L10 55 L20 48 L30 44 L40 41 L50 45 L60 48 L70 46 L80 44 L90 51 L100 56 L110 52 L120 39 L130 29 L140 24 L150 26 L160 25 L170 16 L180 21 L190 25 L200 36 L210 39 L220 30 L230 25 L240 27 L250 33 L260 31 L270 23 L280 30 L290 40 L300 54 L310 55 L320 52 L330 54 L340 58 L350 59 L360 46 L370 38 L380 35 L390 42 L400 48 L410 41 L420 39 L430 42 L440 45 L450 36 L460 23 L470 15 L480 16 L490 23 L500 18 L510 19 L520 26 L530 38 L540 46 L550 45 L560 39 L570 36 L580 35 L590 40 L600 39 L610 37 L620 42 L630 56 L640 63 L650 62 L660 54 L670 50 L680 51 L690 47 L700 35 L700 966 L690 961 L680 959 L670 969 L660 973 L650 970 L640 972 L630 972 L620 970 L610 953 L600 946 L590 946 L580 952 L570 946 L560 948 L550 953 L540 962 L530 956 L520 951 L510 952 L500 951 L490 945 L480 944 L470 951 L460 963 L450 966 L440 967 L430 972 L420 978 L410 976 L400 965 L390 958 L380 968 L370 974 L360 967 L350 969 L340 983 L330 985 L320 977 L310 966 L300 966 L290 966 L280 955 L270 945 L260 952 L250 964 L240 964 L230 959 L220 960 L210 959 L200 955 L190 944 L180 938 L170 942 L160 950 L150 951 L140 955 L130 967 L120 973 L110 969 L100 957 L90 964 L80 963 L70 959 L60 960 L50 968 L40 980 L30 981 L20 977 L10 980 L0 984 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 54 L10 55 L20 48 L30 44 L40 41 L50 45 L60 48 L70 46 L80 44 L90 51 L100 56 L110 52 L120 39 L130 29 L140 24 L150 26 L160 25 L170 16 L180 21 L190 25 L200 36 L210 39 L220 30 L230 25 L240 27 L250 33 L260 31 L270 23 L280 30 L290 40 L300 54 L310 55 L320 52 L330 54 L340 58 L350 59 L360 46 L370 38 L380 35 L390 42 L400 48 L410 41 L420 39 L430 42 L440 45 L450 36 L460 23 L470 15 L480 16 L490 23 L500 18 L510 19 L520 26 L530 38 L540 46 L550 45 L560 39 L570 36 L580 35 L590 40 L600 39 L610 37 L620 42 L630 56 L640 63 L650 62 L660 54 L670 50 L680 51 L690 47 L700 35 L700 966 L690 961 L680 959 L670 969 L660 973 L650 970 L640 972 L630 972 L620 970 L610 953 L600 946 L590 946 L580 952 L570 946 L560 948 L550 953 L540 962 L530 956 L520 951 L510 952 L500 951 L490 945 L480 944 L470 951 L460 963 L450 966 L440 967 L430 972 L420 978 L410 976 L400 965 L390 958 L380 968 L370 974 L360 967 L350 969 L340 983 L330 985 L320 977 L310 966 L300 966 L290 966 L280 955 L270 945 L260 952 L250 964 L240 964 L230 959 L220 960 L210 959 L200 955 L190 944 L180 938 L170 942 L160 950 L150 951 L140 955 L130 967 L120 973 L110 969 L100 957 L90 964 L80 963 L70 959 L60 960 L50 968 L40 980 L30 981 L20 977 L10 980 L0 984 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
 }
 
-.fuente-cursiva {
-  font-family: 'Great Vibes', cursive;
+/* =========================================================
+   FONDO GENERAL DE LA INVITACIÓN
+   Blanco cálido con manchas rosa pastel muy suaves, alternando
+   izquierda y derecha. El patrón se repite cada 1400px
+   (repeat-y), así acompaña a la página sin importar cuánto
+   mida. Para más o menos rosa, cambiar el 30% de --toque.
+   IMPORTANTE: las secciones no deben tener fondo propio
+   (bg-white, bg-purple-50...) o tapan este fondo.
+   ========================================================= */
+@layer components {
+  .fondo-invitacion {
+    --toque: color-mix(in srgb, var(--color-rosa-suave) 45%, transparent);
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(ellipse 80% 14% at 100% 12%, var(--toque), transparent 70%),
+      radial-gradient(ellipse 75% 12% at 0% 38%,   var(--toque), transparent 70%),
+      radial-gradient(ellipse 80% 12% at 100% 62%, var(--toque), transparent 70%),
+      radial-gradient(ellipse 80% 12% at 0% 88%,   var(--toque), transparent 70%);
+    background-size: 100% 1400px;
+    background-repeat: repeat-y;
+    
+      
+  }
 }
 
-/* 
-   6. Animaciones Cinemáticas Ambientales
-   Clase lista para aplicar a contenedores absolutos o imágenes en formato webp/png 
-   para simular partículas de polvo o brisa lenta en el fondo.
-*/
-@keyframes viento-lento {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
-  50% { transform: translate(15px, -15px) rotate(1deg); opacity: 0.8; }
-  100% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+/* =========================================================
+   APARICIÓN AL HACER SCROLL
+   Uso:  <div data-reveal>…</div>
+   Retraso opcional:  <div data-reveal style="--reveal-delay: 200ms">
+   El script que agrega .is-visible está en scripts/reveal.ts.
+   Solo se ocultan los elementos si hay JS (clase .js en <html>),
+   así que sin JavaScript el contenido igual se ve.
+   ========================================================= */
+@layer components {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.9s ease-out,
+      transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.animacion-atmosfera {
-  animation: viento-lento 15s ease-in-out infinite;
+/* =========================================================
+   SOBRE DIGITAL
+   ========================================================= */
+@keyframes pulso-suave {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.animate-pulse-lento {
+  animation: pulso-suave 3s ease-in-out infinite;
+}
+
+.sobre-abierto {
+  opacity: 0;
+  transform: translateY(-100vh);
   pointer-events: none;
 }
 
-@font-face {
-  font-family: 'Claudia';
-  src: url('/fonts/claudiascript.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+/* =========================================================
+   BOTÓN DE MÚSICA
+   ========================================================= */
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-@font-face {
-  font-family: 'Romantic';
-  src: url('/fonts/romantisch-personaluse.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+
+.disco-girando {
+  animation: girar 4s linear infinite;
 }
-@font-face {
-  font-family: 'Anatomia';
-  src: url('/fonts/Anatomia.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+
+/* =========================================================
+   LLUVIA DE PÉTALOS
+   5 pétalos con tamaño, forma, posición y velocidad distintos
+   ========================================================= */
+.petalo {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: rgba(76, 29, 149, 0.4);
+  border-radius: 0 50% 50% 50%;
+  top: -10%;
+  animation: caer 20s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+.petalo:nth-child(1) { left: 15%; animation-duration: 24s; animation-delay: 0s; width: 22px; height: 18px; border-radius: 0 60% 40% 50%; }
+.petalo:nth-child(2) { left: 35%; animation-duration: 30s; animation-delay: 5s; background-color: rgba(107, 33, 168, 0.3); width: 16px; height: 22px; border-radius: 20% 50% 50% 50%; }
+.petalo:nth-child(3) { left: 55%; animation-duration: 22s; animation-delay: 2s; width: 14px; height: 14px; border-radius: 0 50% 60% 40%; }
+.petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 8s; background-color: rgba(124, 58, 237, 0.2); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
+.petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 3s; background-color: rgba(88, 28, 135, 0.3); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
+
+@keyframes caer {
+  0%   { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(40px); }
+  90%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-40px); opacity: 0; }
+}
+
+/* =========================================================
+   ACCESIBILIDAD: respetar "reducir movimiento"
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-pulse-lento,
+  .disco-girando {
+    animation: none;
+  }
+
+  .petalo {
+    display: none;
+  }
 }
