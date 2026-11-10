@@ -17,6 +17,7 @@ const mes = formato({ month: 'long' });
 const dia = formato({ day: 'numeric' });
 const anio = formato({ year: 'numeric' });
 const diaSemana = formato({ weekday: 'long' });
+const { presentacion } = boda;
 ---
 
 <section id="presentacion" class="relative w-full overflow-hidden px-8 pb-6 pt-6 text-center">
@@ -25,47 +26,40 @@ const diaSemana = formato({ weekday: 'long' });
        DECORACIONES (z-0: quedan detrás del texto)
        ===================================================== -->
 
-  <!-- Rosas: esquina inferior izquierda -->
+  <!-- Rosas 1: parte media-alta izquierda -->
   <img
-    src={floresAbajo}
+    src="Esquina1.png"
     alt=""
     aria-hidden="true"
-    class="pointer-events-none absolute bottom-0 left-0 z-0 w-[46%] max-w-52 select-none"
+    class="pointer-events-none absolute left-0 top-[40%] z-0 w-[22%] max-w-52 select-none saturate-90"
   />
 
-  {/*
-    PARA AGREGAR OTRA DECORACIÓN: copiá este bloque, sacale el comentario
-    y cambiá el src y la posición.
-
-    <img
-      src="/ramita.png"
-      alt=""
-      aria-hidden="true"
-      class="pointer-events-none absolute bottom-24 right-6 z-0 w-14 select-none"
-    />
-
-    Posición: top-/bottom- y left-/right- (cada paso son 4px: right-6 = 24px).
-    Tamaño: w-14 = 56px. Para espejarla: agregá -scale-x-100.
-  */}
+  <!-- Rosas 2: parte baja derecha -->
+  <img
+    src="Esquina2.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-22 right-0 z-0 w-[16%] max-w-52 select-none saturate-90"
+  />
 
   <!-- =====================================================
        CONTENIDO (z-10: queda por encima de las decoraciones)
        ===================================================== -->
   <div class="relative z-10">
 
-    <p data-reveal class="etiqueta mx-auto max-w-72">
+    <p data-reveal class="etiqueta mx-auto max-w-xs !text-[0.85rem] leading-relaxed">
       Por la gracia de Dios y la compañía de nuestros padres
     </p>
 
     <div data-reveal class="mt-7 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-      <p class="etiqueta whitespace-pre-line">{padres.novio}</p>
-      <span class="h-12 w-px bg-rosa/40" aria-hidden="true"></span>
-      <p class="etiqueta whitespace-pre-line">{padres.novia}</p>
+      <p class="etiqueta whitespace-pre-line !text-[0.80rem] leading-relaxed">{padres.novio}</p>
+      <span class="h-14 w-px bg-rosa/40" aria-hidden="true"></span>
+      <p class="etiqueta whitespace-pre-line !text-[0.80rem] leading-relaxed">{padres.novia}</p>
     </div>
 
     <SeparadorCorazon class="mt-7 w-full" />
 
-    <p data-reveal class="etiqueta mx-auto mt-8 max-w-64 text-rosa">
+    <p data-reveal class="etiqueta mx-auto mt-8 max-w-xs !text-[0.80rem] leading-relaxed text-rosa">
       Tenemos el agrado de invitarte a nuestra boda:
     </p>
 
@@ -73,19 +67,29 @@ const diaSemana = formato({ weekday: 'long' });
     <h1
       data-reveal
       style="--reveal-delay: 150ms"
-      class="mt-10 flex flex-col items-center font-script leading-none text-rosa"
+      class="mt-6 flex flex-col items-center text-center font-script text-[3.5rem] leading-[1.2] text-rosa [word-spacing:0.2em] sm:text-5xl"
+      
     >
-      <span class="text-[6.25rem]">{novio}</span>
-      <span class="my-1 flex w-full items-center justify-center gap-4 text-4xl">
+      <span class="flex flex-col items-center ">
+        <span>{presentacion.novio.nombre}</span>
+        <span text-[2.75rem]>{presentacion.novio.apellido}</span>
+      </span>
+
+      <span class="my-3 flex w-full items-center justify-center gap-4 text-4xl">
         <span class="h-px w-16 bg-rosa/40" aria-hidden="true"></span>
         <span>y</span>
         <span class="h-px w-16 bg-rosa/40" aria-hidden="true"></span>
       </span>
-      <span class="text-[6.25rem]">{novia}</span>
+
+      <span class="flex flex-col items-center">
+        <span>{presentacion.novia.nombre}</span>
+        <span>{presentacion.novia.apellido}</span>
+      </span>
     </h1>
 
+
     <!-- Fecha -->
-    <div data-reveal class="mt-8 flex flex-col items-center text-rosa">
+    <div data-reveal class="mt-6 flex flex-col items-center text-rosa">
       <p class="font-ui text-sm font-medium uppercase tracking-[0.35em]">{mes}</p>
 
       <div class="-mt-2 grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4">

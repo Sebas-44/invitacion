@@ -13,10 +13,11 @@ import Photos from '../components/Photos.astro';
 import Closing from '../components/Closing.astro';
 import Divider from '../components/Divider.astro';
 import Calendar from '../components/Calendar.astro';
+import Sugerencia from '../components/Sugerencia.astro';
 
 // Orden de las secciones: para reordenar, agregar o sacar una, se toca solo esta lista.
 // (Hero, Details, Calendar, Qr, Header y Footer quedaron fuera porque no se usaban.)
-const secciones = [Home, Presentacion, Calendar, Countdown, Location, Program, RSVP, Photos, Closing];
+const secciones = [Home, Presentacion, Calendar, Countdown, Location, Sugerencia, RSVP, Photos];
 ---
 
 <BaseLayout bodyClass="bg-pagina min-h-dvh flex justify-center py-6 px-4 overflow-hidden">
@@ -68,6 +69,7 @@ const secciones = [Home, Presentacion, Calendar, Countdown, Location, Program, R
   </div>
 
   <!-- Lluvia de pétalos (los estilos están en global.css) -->
+   {/*
   <div
     class="fixed inset-0 pointer-events-none z-[60] overflow-hidden"
     id="contenedor-petalos"
@@ -80,7 +82,7 @@ const secciones = [Home, Presentacion, Calendar, Countdown, Location, Program, R
     <div class="petalo"></div>
     <div class="petalo"></div>
   </div>
-
+*/}
   <!-- La invitación real -->
   <main
     class="w-full max-w-md fondo-invitacion rounded-3xl shadow-xl shadow-rosa/15 overflow-hidden flex-col text-center relative z-[50]"

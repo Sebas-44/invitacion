@@ -4,17 +4,31 @@
 // Los valores marcados con TODO son de ejemplo: reemplazalos.
 // =========================================================
 
-const novio = 'Gabriel';
-const novia = 'Maribel';
+const novio = 'Angel Gabriel\nAnachuri';
+const novia = 'Veronica Maribel\nOlivera';
 
 export const boda = {
   novios: { novio, novia },
+
+  // Letras del monograma de la portada (Home)
+  iniciales: { novio: 'G', novia: 'V' },
+
+  // Cómo se muestran los nombres en la presentación: nombre arriba, apellido abajo
+  presentacion: {
+    novio: { nombre: 'Angel Gabriel', apellido: 'Anachuri' },
+    novia: { nombre: 'Veronica Maribel', apellido: 'Olivera' },
+  },
 
   // Fecha y hora de la ceremonia (la usa la cuenta regresiva).
   // Formato ISO con zona horaria de Argentina (-03:00).
   fecha: {
     iso: '2027-01-08T20:00:00-03:00',
     texto: 'Viernes 8 de Enero',
+  },
+
+  confirmarAntesDe: {
+    iso: '2026-12-31T23:59:59-03:00',
+    texto: 'Miércoles 31 de Diciembre',
   },
 
 
@@ -41,7 +55,7 @@ export const boda = {
     referencia: 'Colosenses 3:14',
     padres: {
       novio: 'Cristobal Anachuri\ny\nAlbina Ortega', // TODO
-      novia: 'Jorge Olivera\ny\nCristina Choque', // TODO
+      novia: 'Jorge\nOlivera\ny\nCristina Choque', // TODO
     },
   },
   
@@ -55,12 +69,28 @@ export const boda = {
     floresArriba: '/EsquinaArriba.png', // rosas, esquina superior derecha (PNG transparente)
     floresAbajo: '/EsquinaAbajo.png', // rosas, esquina inferior izquierda (PNG transparente)
     divisor: '/Divisor.png', // divisor floral chico
-    pareja: '/Foto12.jpg', // foto de la portada (vertical, proporción 7:10)
+    pareja: '/Foto1.jpg', // foto de la portada (vertical, proporción 7:10)
     lugar: '/LugarEjemplo.jpg',
+  },
+
+  sheets: {
+  canciones: 'https://script.google.com/macros/s/AKfycbxnHsNd8zRERYB7FDsuNugBK9Yf93V_hdO4bLI9x6ntkyRkg2Uvpi_FXNnHDJopP1gVNg/exec',
+  invitados: 'https://script.google.com/macros/s/XXXX/exec', // TODO
   },
 
   // Archivos dentro de /public
   musica: '/Musica.mp3',
+
+  galeria: {
+  versiculo:
+    'Estando persuadido de esto, que el que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo.',
+  referencia: 'Filipenses 1:6',
+  fotos: [
+    { src: '/Foto1.jpg', alt: 'Foto principal de los novios' },
+    { src: '/Foto2.jpeg', alt: 'Momento especial' },
+    { src: '/Foto3c.jpg', alt: 'Momento divertido' },
+  ],
+},
 
   // Textos de pestaña y vista previa de WhatsApp
   meta: {

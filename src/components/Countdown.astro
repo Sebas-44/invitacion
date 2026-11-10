@@ -11,44 +11,61 @@ const unidades = [
 ];
 ---
 
-<section id="cuenta-regresiva" class="w-full px-6 py-10 text-center">
+<section id="cuenta-regresiva" class="relative w-full overflow-hidden px-6 py-10 text-center">
 
-<h2
-  data-reveal
-  class="font-ui text-xl font-semibold uppercase tracking-[0.25em] text-malva"
->
-  Faltan
-</h2>
+  <!-- =====================================================
+       DECORACIÓN SOBRE LA MANCHA ROSA (z-0: detrás del texto)
+       ===================================================== -->
+  <img
+    src="Esquina1.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-22 left-0 z-0 w-[22%] max-w-48 select-none"
+  />
 
-  <div
-    data-reveal
-    style="--reveal-delay: 150ms"
-    data-fecha={boda.fecha.iso}
-    role="timer"
-    aria-label="Cuenta regresiva para la boda"
-    class="mt-4 flex items-start justify-center"
-  >
-    {unidades.map((u, i) => (
-      <>
-        {i > 0 && (
-          <span
-            aria-hidden="true"
-            class="px-1.5 font-body text-4xl leading-none text-rosa sm:px-1 sm:text-5xl"
-          >
-            :
-          </span>
-        )}
-        <div class="flex flex-col items-center">
-          <span
-            data-unidad={u.clave}
-            class="min-w-[2ch] font-body text-6xl font-medium leading-none text-rosa sm:text-6xl"
-          >
-            00
-          </span>
-          <span class="mt-2 font-body text-base text-rosa/75">{u.etiqueta}</span>
-        </div>
-      </>
-    ))}
+  <!-- =====================================================
+       CONTENIDO (z-10: por encima de la decoración)
+       ===================================================== -->
+  <div class="relative z-10">
+
+    <h2
+      data-reveal
+      class="mt-4 font-body font-ui text-xl font-semibold uppercase tracking-[0.25em] text-malva"
+    >
+      Faltan
+    </h2>
+
+    <div
+      data-reveal
+      style="--reveal-delay: 150ms"
+      data-fecha={boda.fecha.iso}
+      role="timer"
+      aria-label="Cuenta regresiva para la boda"
+      class="mt-4 flex items-start justify-center"
+    >
+      {unidades.map((u, i) => (
+        <>
+          {i > 0 && (
+            <span
+              aria-hidden="true"
+              class="px-1.5 font-body text-4xl leading-none text-rosa sm:px-1 sm:text-5xl"
+            >
+              :
+            </span>
+          )}
+          <div class="flex flex-col items-center">
+            <span
+              data-unidad={u.clave}
+              class="min-w-[2ch] font-body text-6xl font-medium leading-none text-rosa sm:text-6xl"
+            >
+              00
+            </span>
+            <span class="mt-2 font-body text-base text-rosa/75">{u.etiqueta}</span>
+          </div>
+        </>
+      ))}
+    </div>
+
   </div>
 
 </section>

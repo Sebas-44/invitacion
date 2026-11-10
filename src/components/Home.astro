@@ -8,7 +8,7 @@ const { novio, novia } = boda.novios;
 const { versiculo, referencia, padres } = boda.portada;
 const { floresArriba, floresAbajo, divisor, pareja } = boda.imagenes;
 
-const inicial = (nombre: string) => nombre.charAt(0).toUpperCase();
+const { iniciales } = boda;
 
 // Mes, día y año a partir de la fecha de la boda (hora de Argentina)
 const fecha = new Date(boda.fecha.iso);
@@ -17,6 +17,7 @@ const formato = (opciones: Intl.DateTimeFormatOptions) =>
 const mes = formato({ month: 'long' });
 const dia = formato({ day: 'numeric' });
 const anio = formato({ year: 'numeric' });
+const { presentacion } = boda;
 ---
 
 <section id="inicio" class="relative w-full overflow-hidden pb-2">
@@ -26,27 +27,28 @@ const anio = formato({ year: 'numeric' });
     src={floresArriba}
     alt=""
     aria-hidden="true"
-    class="pointer-events-none absolute right-0 top-0 z-0 w-[90%] max-w-96 select-none"
+    class="pointer-events-none absolute right-0 top-0 z-0 w-[90%] max-w-96 select-none saturate-120"
   />
 
   <!-- Versículo + monograma -->
   <header class="relative z-10 flex flex-col items-center px-8 pt-52 text-center">
+{/*
     <p data-reveal class="etiqueta max-w-64">
       {versiculo}
       <span class="mt-1 block text-[10px] tracking-[0.15em]">{referencia}</span>
     </p>
-
-    <p
-      data-reveal
-      style="--reveal-delay: 150ms"
-      role="img"
-      aria-label={`${inicial(novio)} y ${inicial(novia)}`}
-      class="mt-2 flex items-end justify-center font-body font-medium leading-none text-rosa"
-    >
-      <span aria-hidden="true" class="text-[8.5rem]">{inicial(novio)}</span>
-      <span aria-hidden="true" class="mx-2 mb-3 font-script text-4xl"> y</span>
-      <span aria-hidden="true" class="text-[8.5rem]">{inicial(novia)}</span>
-    </p>
+*/}
+  <p
+    data-reveal
+    style="--reveal-delay: 150ms"
+    role="img"
+    aria-label={`${iniciales.novio} y ${iniciales.novia}`}
+    class="mt-2 flex items-end justify-center font-body font-medium leading-none text-rosa"
+  >
+    <span aria-hidden="true" class="text-[8.5rem]">{iniciales.novio}</span>
+    <span aria-hidden="true" class="mx-2 mb-3 font-script text-4xl">y</span>
+    <span aria-hidden="true" class="text-[8.5rem]">{iniciales.novia}</span>
+  </p>
 
     <SeparadorCorazon class="mt-4 w-64" />
   </header>
