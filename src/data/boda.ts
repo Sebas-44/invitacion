@@ -22,7 +22,7 @@ export const boda = {
   // Fecha y hora de la ceremonia (la usa la cuenta regresiva).
   // Formato ISO con zona horaria de Argentina (-03:00).
   fecha: {
-    iso: '2027-01-08T20:00:00-03:00',
+    iso: '2027-01-08T13:00:00-03:00',
     texto: 'Viernes 8 de Enero',
   },
 
