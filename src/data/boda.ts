@@ -36,7 +36,7 @@ export const boda = {
     lugar: 'Predio de familia Yucra', // TODO
     localidad: 'En frente del circuito Matheu', // TODO
     hora: '20:00',
-    mapa: 'https://maps.app.goo.gl/XXXXXXXX', // TODO
+    mapa: 'https://maps.app.goo.gl/mq5TDFQHhPxbnaeP8', // TODO
   },
 
   // Línea de tiempo del día. `icono` es la clave del ícono que
@@ -70,12 +70,12 @@ export const boda = {
     floresAbajo: '/EsquinaAbajo.png', // rosas, esquina inferior izquierda (PNG transparente)
     divisor: '/Divisor.png', // divisor floral chico
     pareja: '/Foto1.jpg', // foto de la portada (vertical, proporción 7:10)
-    lugar: '/LugarEjemplo.jpg',
+    lugar: '/Lugar1.png',
   },
 
   sheets: {
-  canciones: 'https://script.google.com/macros/s/AKfycbxnHsNd8zRERYB7FDsuNugBK9Yf93V_hdO4bLI9x6ntkyRkg2Uvpi_FXNnHDJopP1gVNg/exec',
-  invitados: 'https://script.google.com/macros/s/XXXX/exec', // TODO
+  canciones: 'https://script.google.com/macros/s/AKfycbxspdI5QIJoiyKqDnHo4grXrcgyGOWFeZfn9N53Nxe5rPoctZxF15t3t9VkvYWNOWhfnw/exec',
+  invitados: 'https://script.google.com/macros/s/AKfycbwTXUVO367dVo3_zsPAFuS4ny7CK-0M0c2b3pSg4baxHakw67pVaFey3LXEq8siYEga/exec', // TODO
   },
 
   // Archivos dentro de /public
