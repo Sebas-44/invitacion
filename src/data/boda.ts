@@ -15,8 +15,8 @@ export const boda = {
 
   // Cómo se muestran los nombres en la presentación: nombre arriba, apellido abajo
   presentacion: {
-    novio: { nombre: 'Angel Gabriel', apellido: 'Anachuri' },
-    novia: { nombre: 'Veronica Maribel', apellido: 'Olivera' },
+    novio: { nombre: 'Angel\nGabriel', apellido: 'Anachuri' },
+    novia: { nombre: 'Veronica\nMaribel', apellido: 'Olivera' },
   },
 
   // Fecha y hora de la ceremonia (la usa la cuenta regresiva).
