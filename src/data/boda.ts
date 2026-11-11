@@ -60,8 +60,8 @@ export const boda = {
   },
   
   whatsapp: {
-  novio: '549XXXXXXXXXX', // TODO
-  novia: '549XXXXXXXXXX', // TODO
+  novio: '5493877436147', // TODO
+  novia: '5493484311750', // TODO
 },
 
   // Imágenes dentro de /public. Para cambiar una foto o una flor, se cambia acá.
