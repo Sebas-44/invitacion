@@ -5,4 +5,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  site: 'https://invitacion-gabriel-y-veronica.vercel.app/', // Tu URL final de Vercel
+  
 });

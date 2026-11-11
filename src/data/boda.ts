@@ -98,6 +98,6 @@ export const boda = {
     tituloCompartir: `¡Nos Casamos! - ${novio} & ${novia}`,
     descripcion:
       'Estás invitado a celebrar este momento tan especial con nosotros. ¡Hacé clic para ver la invitación y confirmar asistencia!',
-    imagen: '/miniatura.jpg', // 1200x630
+    imagen: '/miniatura2.jpg?v=2', // 1200x630
   },
 } as const;
