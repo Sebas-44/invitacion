@@ -27,15 +27,15 @@ export const boda = {
   },
 
   confirmarAntesDe: {
-    iso: '2026-12-31T23:59:59-03:00',
-    texto: 'Miércoles 31 de Diciembre',
+    iso: '2027-01-08T13:00:00-03:00',
+    texto: 'Viernes 8 de Enero a las 13:00',
   },
 
 
   ceremonia: {
     lugar: 'Predio de familia Yucra', // TODO
     localidad: 'En frente del circuito Matheu', // TODO
-    hora: '20:00',
+    hora: '13:00',
     mapa: 'https://maps.app.goo.gl/mq5TDFQHhPxbnaeP8', // TODO
   },
 
