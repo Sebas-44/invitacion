@@ -35,7 +35,7 @@ const clasesEnviar =
     src="Esquina1.png"
     alt=""
     aria-hidden="true"
-    class="pointer-events-none absolute right-0 -top-0 z-0 w-[26%] max-w-48 -scale-x-100 select-none"
+    class="pointer-events-none absolute right-0 top-0 z-0 w-[26%] max-w-48 -scale-x-100 select-none"
   />
 
   <!-- =====================================================
@@ -146,7 +146,7 @@ const clasesEnviar =
 
   <!-- Molde de los campos de acompañantes (el script lo copia) -->
   <template id="plantilla-acompanante">
-    <input type="text" autocomplete="off" maxlength="80" class={clasesCampo} />
+    <input type="text" required autocomplete="off" maxlength="80" class={clasesCampo} />
   </template>
 
 </section>
@@ -176,9 +176,20 @@ const clasesEnviar =
       aviso.classList.toggle('text-rosa', !esError);
     };
 
-    // Dibuja un campo de nombre por cada acompañante elegido (con estilo identico y en minusculas)
+    // Quita el borde rojo apenas el usuario escribe en el campo principal
+    campoNombre.addEventListener('input', () => {
+      if (campoNombre.value.trim()) {
+        campoNombre.setAttribute('aria-invalid', 'false');
+        mostrarAviso('');
+      }
+    });
+
+    // Dibuja un campo de nombre por cada acompañante elegido
     const dibujarAcompanantes = () => {
       contenedorExtra.innerHTML = '';
+      selectAcompanantes.setAttribute('aria-invalid', 'false');
+      mostrarAviso('');
+
       if (!asiste) return;
 
       const cantidad = parseInt(selectAcompanantes.value, 10);
@@ -189,6 +200,12 @@ const clasesEnviar =
         const campo = molde.cloneNode(true) as HTMLInputElement;
         campo.placeholder = `Nombre del acompañante ${i}`;
         campo.setAttribute('aria-label', `Nombre del acompañante ${i}`);
+        campo.addEventListener('input', () => {
+          if (campo.value.trim()) {
+            campo.setAttribute('aria-invalid', 'false');
+            mostrarAviso('');
+          }
+        });
         contenedorExtra.appendChild(campo);
       }
     };
@@ -202,33 +219,72 @@ const clasesEnviar =
       mostrarAviso('');
     };
 
-    // Lee y valida el formulario. Devuelve null si falta algo.
+    // Lee y valida el formulario completo. Devuelve null si falta algo.
     const leerFormulario = (): Datos | null => {
       const nombre = campoNombre.value.trim();
+      const faltaNombre = !nombre;
+      campoNombre.setAttribute('aria-invalid', String(faltaNombre));
+
+      // 1. Validar si eligió asistencia
       if (asiste === null) {
-        mostrarAviso('Elegí si asistirás o no.', true);
-        btnSi.focus();
+        if (faltaNombre) {
+          mostrarAviso('Completá tu nombre y elegí si asistirás o no.', true);
+          campoNombre.focus();
+        } else {
+          mostrarAviso('Elegí si asistirás o no.', true);
+          btnSi.focus();
+        }
         return null;
       }
 
-      if (!asiste) return { nombre, acompanantes: [] };
+      // 2. Si NO asiste, solo requiere su nombre
+      if (!asiste) {
+        if (faltaNombre) {
+          mostrarAviso('Completá tu nombre y apellido antes de enviar.', true);
+          campoNombre.focus();
+          return null;
+        }
+        return { nombre, acompanantes: [] };
+      }
 
+      // 3. Si SÍ asiste, validar que haya seleccionado cantidad de acompañantes
       if (selectAcompanantes.value === '') {
-        mostrarAviso('Elegí el número de acompañantes.', true);
-        selectAcompanantes.focus();
+        selectAcompanantes.setAttribute('aria-invalid', 'true');
+        if (faltaNombre) {
+          mostrarAviso('Completá tu nombre y elegí el número de acompañantes.', true);
+          campoNombre.focus();
+        } else {
+          mostrarAviso('Elegí el número de acompañantes.', true);
+          selectAcompanantes.focus();
+        }
         return null;
       }
 
+      // 4. Validar campos de acompañantes (si eligió 1 o más)
       const campos = Array.from(contenedorExtra.querySelectorAll<HTMLInputElement>('input'));
-      let faltan = false;
+      let faltanAcompanantes = false;
       campos.forEach((campo) => {
         const vacio = !campo.value.trim();
         campo.setAttribute('aria-invalid', String(vacio));
-        if (vacio) faltan = true;
+        if (vacio) faltanAcompanantes = true;
       });
 
-      if (faltan) {
+      if (faltaNombre && faltanAcompanantes) {
+        mostrarAviso('Completá tu nombre y el de todos tus acompañantes.', true);
+        campoNombre.focus();
+        return null;
+      }
+
+      if (faltaNombre) {
+        mostrarAviso('Completá tu nombre y apellido antes de enviar.', true);
+        campoNombre.focus();
+        return null;
+      }
+
+      if (faltanAcompanantes) {
         mostrarAviso('Completá el nombre de todos tus acompañantes.', true);
+        const primerVacio = campos.find((c) => !c.value.trim());
+        primerVacio?.focus();
         return null;
       }
 

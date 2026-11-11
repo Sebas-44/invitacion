@@ -33,8 +33,8 @@ export const boda = {
 
 
   ceremonia: {
-    lugar: 'Predio de familia Yucra', // TODO
-    localidad: 'En frente del circuito Matheu', // TODO
+    lugar: 'ICE Lambertucci', // TODO
+    //localidad: 'En frente del circuito Matheu', // TODO
     hora: '13:00',
     mapa: 'https://maps.app.goo.gl/mq5TDFQHhPxbnaeP8', // TODO
   },

@@ -3,7 +3,7 @@
 // Ceremonia: hora, lugar, botón al mapa y foto del lugar. Los datos salen de data/boda.ts
 import { boda } from '../data/boda';
 
-const { hora, lugar, localidad, mapa } = boda.ceremonia;
+const { hora, lugar, mapa } = boda.ceremonia;
 const fotoLugar = boda.imagenes.lugar;
 ---
 
@@ -56,7 +56,9 @@ const fotoLugar = boda.imagenes.lugar;
       </h2>
 
       <p class="mt-2 font-ui text-base text-malva">{lugar}</p>
-      <p class="mt-1 font-ui text-sm tracking-[0.05em] text-malva/90">{localidad}</p>
+    
+      <!-- <p class="mt-1 font-ui text-sm tracking-[0.05em] text-malva/90">{localidad}</p> -->
+    
     </div>
 
     <!-- Botón al mapa, con la manito que sobresale como en la referencia (estilo estandarizado) -->
