@@ -166,11 +166,11 @@
 }
 
 .petalo:nth-child(1) { left: 15%; animation-duration: 24s; animation-delay: 0s; width: 22px; height: 18px; border-radius: 0 60% 40% 50%; }
-.petalo:nth-child(2) { left: 35%; animation-duration: 30s; animation-delay: 4s; background-color: rgba(255, 134, 188, 0.76); width: 16px; height: 22px; border-radius: 20% 50% 50% 50%; }
+.petalo:nth-child(2) { left: 35%; animation-duration: 30s; animation-delay: 4s; background-color: rgba(255, 192, 203, 0.832); width: 16px; height: 22px; border-radius: 20% 50% 50% 50%; }
 .petalo:nth-child(3) { left: 55%; animation-duration: 22s; animation-delay: 1s; width: 14px; height: 14px; border-radius: 0 50% 60% 40%; }
-.petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 7s; background-color: rgba(255, 152, 212, 0.653); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
-.petalo:nth-child(4) { left: 20%; animation-duration: 23s; animation-delay: 3s; background-color: rgba(255, 167, 207, 0.818); width: 24px; height: 20px; border-radius: 0 50% 50% 50%; }
-.petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 2s; background-color: rgba(255, 155, 218, 0.838); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
+.petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 7s; background-color: rgba(255, 192, 203, 0.653); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
+.petalo:nth-child(4) { left: 20%; animation-duration: 23s; animation-delay: 3s; background-color: rgba(255, 193, 227, 0.768); width: 24px; height: 20px; border-radius: 0 50% 50% 50%; }
+.petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 2s; background-color: rgba(255, 199, 209, 0.679); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
 
 @keyframes caer {
   0%   { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; }
