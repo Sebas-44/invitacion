@@ -169,7 +169,7 @@
 .petalo:nth-child(2) { left: 35%; animation-duration: 30s; animation-delay: 5s; background-color: rgba(255, 128, 185, 0.553); width: 16px; height: 22px; border-radius: 20% 50% 50% 50%; }
 .petalo:nth-child(3) { left: 55%; animation-duration: 22s; animation-delay: 2s; width: 14px; height: 14px; border-radius: 0 50% 60% 40%; }
 .petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 8s; background-color: rgba(255, 130, 186, 0.463); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
-.petalo:nth-child(4) { left: 20%; animation-duration: 28s; animation-delay: 4s; background-color: rgba(255, 146, 195, 0.459); width: 24px; height: 20px; border-radius: 0 50% 50% 50%; }
+.petalo:nth-child(4) { left: 20%; animation-duration: 28s; animation-delay: 4s; background-color: rgba(255, 167, 207, 0.459); width: 24px; height: 20px; border-radius: 0 50% 50% 50%; }
 .petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 3s; background-color: rgba(255, 130, 186, 0.463); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
 
 @keyframes caer {
