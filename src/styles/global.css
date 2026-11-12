@@ -170,7 +170,7 @@
 .petalo:nth-child(3) { left: 55%; animation-duration: 22s; animation-delay: 1s; width: 14px; height: 14px; border-radius: 0 50% 60% 40%; }
 .petalo:nth-child(4) { left: 75%; animation-duration: 28s; animation-delay: 7s; background-color: rgba(255, 195, 210, 0.727); width: 24px; height: 16px; border-radius: 0 50% 50% 50%; }
 .petalo:nth-child(4) { left: 20%; animation-duration: 23s; animation-delay: 3s; background-color: rgba(255, 200, 225, 0.622); width: 24px; height: 20px; border-radius: 0 50% 50% 50%; }
-.petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 2s; background-color: rgba(255, 140, 240, 0.834); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
+.petalo:nth-child(5) { left: 85%; animation-duration: 26s; animation-delay: 2s; background-color: rgba(255, 215, 210, 0.834); width: 20px; height: 25px; border-radius: 0 50% 40% 50%; }
 
 @keyframes caer {
   0%   { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; }
