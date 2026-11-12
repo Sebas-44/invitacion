@@ -34,7 +34,7 @@ export const boda = {
 
   ceremonia: {
     lugar: 'ICE Lambertucci', // TODO
-    //localidad: 'En frente del circuito Matheu', // TODO
+    localidad: 'Buenos Aires', // TODO
     hora: '13:00',
     mapa: 'https://maps.app.goo.gl/mq5TDFQHhPxbnaeP8', // TODO
   },

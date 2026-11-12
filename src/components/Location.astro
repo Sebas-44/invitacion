@@ -5,6 +5,7 @@ import { boda } from '../data/boda';
 
 const { hora, lugar, mapa } = boda.ceremonia;
 const fotoLugar = boda.imagenes.lugar;
+const { localidad } = boda.ceremonia;
 ---
 
 <section id="ubicacion" class="relative w-full overflow-hidden px-8 py-10 text-center">
@@ -57,7 +58,7 @@ const fotoLugar = boda.imagenes.lugar;
 
       <p class="mt-2 font-ui text-base text-malva">{lugar}</p>
     
-      <!-- <p class="mt-1 font-ui text-sm tracking-[0.05em] text-malva/90">{localidad}</p> -->
+     <p class="mt-1 font-ui text-sm tracking-[0.05em] text-malva/90">{localidad}</p> 
     
     </div>
 
