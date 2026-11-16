@@ -34,7 +34,7 @@ export const boda = {
 // Listas de nombres de la presentación (consejeros, padrinos, etc.). Se pueden agregar más grupos.
   listasDeNombres: [
     {
-      titulo: 'Nuestros Consejeros',
+      titulo: 'Nuestros Consejeros:',
       nombres: [
         'Juan Carlos Olivera Choque ', // TODO
         'Norma Nina\nde Olivera',
