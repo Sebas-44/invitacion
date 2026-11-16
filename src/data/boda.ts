@@ -31,6 +31,18 @@ export const boda = {
     texto: 'Viernes 8 de Enero a las 13:00',
   },
 
+// Listas de nombres de la presentación (consejeros, padrinos, etc.). Se pueden agregar más grupos.
+  listasDeNombres: [
+    {
+      titulo: 'Nuestros Consejeros',
+      nombres: [
+        'Juan Carlos Olivera Choque ', // TODO
+        'Norma Nina\nde Olivera',
+        'David Alejandro Anachuri',
+        'Gloria Elizabeth Delgado',
+      ],
+    },
+  ],
 
   ceremonia: {
     lugar: 'ICE Lambertucci', // TODO
@@ -54,8 +66,8 @@ export const boda = {
     versiculo: 'Por encima de todo, vístanse de amor, que es el vínculo perfecto.',
     referencia: 'Colosenses 3:14',
     padres: {
-      novio: 'Cristobal Anachuri\ny\nAlbina Ortega', // TODO
-      novia: 'Jorge\nOlivera\ny\nCristina Choque', // TODO
+      novio: 'Cristobal Anachuri\n \nAlbina Ortega', // TODO
+      novia: 'Jorge\nOlivera\n \nCristina Choque', // TODO
     },
   },
   

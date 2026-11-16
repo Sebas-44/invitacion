@@ -17,7 +17,7 @@ const mes = formato({ month: 'long' });
 const dia = formato({ day: 'numeric' });
 const anio = formato({ year: 'numeric' });
 const diaSemana = formato({ weekday: 'long' });
-const { presentacion } = boda;
+const { presentacion, listasDeNombres } = boda;
 ---
 
 <section id="presentacion" class="relative w-full overflow-hidden px-8 pb-6 pt-6 text-center">
@@ -59,6 +59,22 @@ const { presentacion } = boda;
 
     <SeparadorCorazon class="mt-7 w-full" />
 
+
+    {listasDeNombres.map((lista) => (
+    <div data-reveal class="mt-8">
+      <h2 data-reveal class="etiqueta mx-auto max-w-xs !text-[0.85rem] leading-relaxed">
+        {lista.titulo}
+      </h2>
+      <ul class="mx-auto mt-4 grid max-w-xs grid-cols-2 gap-x-4 gap-y-3">
+        {lista.nombres.map((nombre) => (
+          <li class="etiqueta whitespace-pre-line !text-[0.80rem] leading-relaxed [&:last-child:nth-child(odd)]:col-span-2">
+            {nombre}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+    <SeparadorCorazon class="mt-7 w-full" />
     <p data-reveal class="etiqueta mx-auto mt-8 max-w-xs !text-[0.80rem] leading-relaxed text-rosa">
       Tenemos el agrado de invitarte a nuestra boda:
     </p>
