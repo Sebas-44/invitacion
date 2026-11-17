@@ -37,7 +37,7 @@ export const boda = {
       titulo: 'Nuestros Consejeros:',
       nombres: [
         'Juan Carlos Olivera Choque ', // TODO
-        'Norma Nina\nde Olivera',
+        'Norma\nBeatriz\nNina',
         'David Alejandro Anachuri',
         'Gloria Elizabeth Delgado',
       ],
